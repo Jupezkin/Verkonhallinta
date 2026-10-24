@@ -4,16 +4,16 @@ Tehtävän tarkoituksena oli kerätä palvelimen suorituskykymittareita, visuali
 
 ## Node Exporterin käyttöönotto
 Node Exporter asennettiin web1-konttiin. Sen avulla kerättiin palvelimen mittareita, kuten prosessorin käyttöä, muistin käyttöä, levytilaa ja verkkoliikennettä.
-Asennuksen jälkeen Node Exporter käynnistettiin ja sen toimintaa testattiin HTTP-rajapinnan kautta osoitteessa http://localhost:9100/metrics. Testin tuloksena mittareita saatiin näkyviin, joten Node Exporter toimi odotetusti.
+Asennuksen jälkeen Node Exporter käynnistettiin ja sen toimintaa testattiin HTTP-rajapinnan kautta. Testin tuloksena mittareita saatiin näkyviin, joten Node Exporter toimi odotetusti.
 
 
 ## Prometheus
 Prometheus oli käynnissä monitorointiympäristössä. Sen Targets-sivulta tarkistettiin Node Exporterin yhteys.
-web1 näkyi Prometheuksessa tilassa UP, mikä osoitti, että Prometheus pystyi hakemaan mittareita onnistuneesti.
+web1 näkyi Prometheuksessa tilassa UP, mikä osoitti, että Prometheus pystyi hakemaan mittareita onnistuneesti. Prometheus yhdistyi onnistuneesti myös grafanaan (kts. onnistunut_yhteys.png)
 
 
 ## Dashboard
-Löytyy kuvakansiosta. (lähtötilanne.png ja kuormituksen_jälkeen.png)
+Löytyy kuvakansiosta. (kts. lähtötilanne.png ja kuormituksen_jälkeen.png)
 
 
 ## Kuormitustesti
