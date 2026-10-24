@@ -34,7 +34,7 @@ zabbix: Verkon ja palveluiden valvontaan tarkoitettu järjestelmä.
 
 ## 1.2 Verkkokaavio
 
-Löytyy kuvatiedostosta.
+Löytyy kuvatiedostosta. (kts. verkkokaavio.png)
 
 
 
