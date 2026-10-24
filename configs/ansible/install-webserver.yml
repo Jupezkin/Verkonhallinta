@@ -1,0 +1,53 @@
+---
+- name: Install and configure web server
+  hosts: web1
+  become: true
+  gather_facts: true
+
+  vars:
+    webserver_name: web1
+
+  tasks:
+    - name: Update package list and install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Create index page
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head><title>{{ webserver_name }}</title></head>
+          <body><h1>Welcome to {{ webserver_name }}</h1></body>
+          </html>
+        mode: "0644"
+
+    - name: Enable nginx at startup
+      ansible.builtin.command: update-rc.d nginx defaults
+      changed_when: false
+
+    - name: Start nginx if it is not running
+      ansible.builtin.shell: |
+        if ! service nginx status >/dev/null 2>&1; then
+          service nginx start
+        fi
+      args:
+        executable: /bin/bash
+      register: nginx_start
+      changed_when: "'Starting nginx' in nginx_start.stdout"
+
+    - name: Verify web page
+      ansible.builtin.uri:
+        url: http://localhost
+        return_content: true
+        status_code: 200
+      register: web_response
+
+    - name: Confirm server name appears on page
+      ansible.builtin.assert:
+        that:
+          - "'Welcome to web1' in web_response.content"
+        success_msg: "Nginx is responding and the web page identifies web1."
